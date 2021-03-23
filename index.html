@@ -18,12 +18,58 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/cs.css"> -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    // This button will increment the value
+    $('[data-quantity="plus"]').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        // If is not undefined
+        if (!isNaN(currentVal)) {
+            // Increment
+            $('input[name='+fieldName+']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
+    });
+    // This button will decrement the value till 0
+    $('[data-quantity="minus"]').click(function(e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        fieldName = $(this).attr('data-field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name='+fieldName+']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
+    });
+});
+
+
+</script>
+
+
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light f">
   <div class="container-fluid">
     <a class="navbar-brand bd" href="#" >
-    	<img src="Fraazo-Logo.png" height="50px" width="180px">
+    	<img src="img/Fraazo-Logo.png" height="50px" width="180px">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,41 +77,89 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-     <!--  <li class="nav-item rights">
-      	<i class="fa fa-map-marker" aria-hidden="true"></i> Ambala, Hayrana 
-      </li> -->
-
       <div class="rights">
-      	<i class="fa fa-map-marker" aria-hidden="true"></i> Ambala, Hayrana
+      	<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; Ambala, Hayrana
       </div>
-      
 
-
-    <!--   <li class="nav-item"> -->
       	<form class="d-flex">
         <input class="form-control me-4 sizer" type="search" placeholder="Search ..." aria-label="Search" name="search">
         
       </form>
-    <!--   </li> -->
-      <div class="lefts">
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+
+      <div class="lefts" class="btn btn-demo" data-toggle="modal" data-target="#myModal2">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp; Cart
       </div>
         <div class="lefts">
-      	<i class="fa fa-user" aria-hidden="true"></i> Login
+      	<i class="fa fa-user" aria-hidden="true"></i>&nbsp; Login
       </div>
 
-      <!-- <li class="nav-item lefts">
-      	<i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
-      </li>
-      <li class="nav-item lefts">
-      	<i class="fa fa-user" aria-hidden="true"></i> Login
-      </li> -->
-     
       </ul>
      
     </div>
   </div>
 </nav>
+<div class="container demo">
+  
+
+  
+  <!-- Modal -->
+  <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel2">My Cart</h4>
+        </div>
+
+        <div class="modal-body">
+         <div class="row">
+          <div class="col-md-3 col-sm-3">
+            <img src="img/caps.png" height="100px" width="100px" class="images">
+          </div>
+           <div class="col-md-4 col-sm-4">
+            <p>Green Caps</p>
+            <p>500g</p>
+            <p class="pric">$10</p>
+          </div>
+          
+          <div class="col-md-4 col-sm-4">
+            <a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
+<div class="input-group plus-minus-input">
+  <div class="input-group-button c">
+    <button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+  </div>
+  <input class="input-group-field" type="number" name="quantity" value="0">
+  <div class="input-group-button c">
+    <button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+          </div>
+           
+         </div>
+         <div class="row vv">
+          <div class="col-md-7 col-sm-6">
+            <p>1 item</p>
+          <p class="pric">$10</p>
+          </div>
+           <div class="col-md-5 col-sm-6 pd">
+            <button class="checkout_button">Check Out</button>
+          </div>
+          
+           
+         </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid">
   <div class="row slider">
@@ -173,10 +267,11 @@
                 <div class="item active">
                     <div class="row">
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -198,10 +293,37 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -223,35 +345,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -273,10 +371,11 @@
                             </div>
                         </div>
                           <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -298,10 +397,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -327,10 +427,37 @@
                 <div class="item">
                     <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -352,10 +479,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -377,10 +505,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -402,10 +531,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -427,35 +557,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -544,10 +650,11 @@
 </div><br>
 
 
+
 <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h3>FRESH HYDROPONICS <a href="#" class="view">(View all)</a></h3> 
+                <h3>FRESH HYDROPONICS <a href="#" class="view">(View all)</a></h3>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6 hidden-xs">
                 <div class="controls pull-right">
@@ -560,10 +667,11 @@
                 <div class="item active">
                     <div class="row">
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -585,10 +693,37 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -610,35 +745,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -660,10 +771,11 @@
                             </div>
                         </div>
                           <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -685,10 +797,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -714,10 +827,37 @@
                 <div class="item">
                     <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -739,10 +879,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -764,10 +905,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -789,10 +931,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -814,10 +957,59 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+</div>
+</div><br>
+
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <h3>FRESH FRUITS <a href="#" class="view">(View all)</a></h3>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 hidden-xs">
+                <div class="controls pull-right">
+                    <a class="left fa fa-chevron-left btn btn-info " href="#carousel-example" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-info" href="#carousel-example" data-slide="next"></a>
+                </div>
+            </div>
+        </div>
+        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel" data-type="multi">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -839,10 +1031,275 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -872,330 +1329,6 @@
 <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h3>FRESH FRUITS <a href="#" class="view">(View all)</a></h3>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6 hidden-xs">
-                <div class="controls pull-right">
-                    <a class="left fa fa-chevron-left btn btn-info " href="#carousel-example" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-info" href="#carousel-example" data-slide="next"></a>
-                </div>
-            </div>
-        </div>
-        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel" data-type="multi">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                          <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="row">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
-</div>
-</div><br>
-<div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
                 <h3>FRESH VEGETABLES <a href="#" class="view">(View all)</a></h3>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6 hidden-xs">
@@ -1209,10 +1342,11 @@
                 <div class="item active">
                     <div class="row">
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1234,10 +1368,37 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1259,35 +1420,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1309,10 +1446,11 @@
                             </div>
                         </div>
                           <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1334,10 +1472,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1363,10 +1502,37 @@
                 <div class="item">
                     <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1388,10 +1554,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1413,10 +1580,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1438,10 +1606,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1463,35 +1632,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1517,6 +1662,7 @@
         </div>
 </div>
 </div><br>
+
 <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -1533,10 +1679,11 @@
                 <div class="item active">
                     <div class="row">
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1558,10 +1705,37 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1583,35 +1757,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1633,10 +1783,11 @@
                             </div>
                         </div>
                           <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1658,10 +1809,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1687,10 +1839,37 @@
                 <div class="item">
                     <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
+                                <div class="slider-main-detail">
+                                    <div class="slider-detail">
+                                        <div class="product-detail">
+                                            <h5>Product Name</h5>
+                                            <h5 class="detail-price">$187.87</h5>
+                                        </div>
+                                    </div>
+                                    <div class="cart-section">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                               <h5 class="Quantity">Quantity: 100g </h5>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                       <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
+                            <div class="slider-item">
+                                <div class="slider-image">
+                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1712,10 +1891,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1737,10 +1917,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1762,10 +1943,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
@@ -1787,35 +1969,11 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
+                          <a href="#">
                             <div class="slider-item">
                                 <div class="slider-image">
                                     <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="slider-main-detail">
-                                    <div class="slider-detail">
-                                        <div class="product-detail">
-                                            <h5>Product Name</h5>
-                                            <h5 class="detail-price">$187.87</h5>
-                                        </div>
-                                    </div>
-                                    <div class="cart-section">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                               <h5 class="Quantity">Quantity: 100g </h5>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <a href="#" class="AddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="slider-item">
-                                <div class="slider-image">
-                                    <img src="https://dummyimage.com/250x200/#cccccc/1f1b1f.png" class="img-responsive" alt="a" />
-                                </div>
+                                </div></a>
                                 <div class="slider-main-detail">
                                     <div class="slider-detail">
                                         <div class="product-detail">
